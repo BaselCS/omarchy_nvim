@@ -2,24 +2,31 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- `z-` for Harper
-vim.keymap.set("n", "z=", function()
-  -- التأكد من وجود Telescope أولاً
-  local ok, telescope = pcall(require, "telescope.builtin")
-  if ok then
-    telescope.lsp_code_actions(require("telescope.themes").get_cursor({
-      layout_config = {
-        width = 0.3,                       -- عرض القائمة (30% من الشاشة)
-        height = 0.2,                      -- طول القائمة
-      },
-      prompt_title = "Harper Suggestions", -- عنوان القائمة
-    }))
-  else
-    -- إذا لم يكن Telescope متاحاً، استخدم الأمر الافتراضي
-    vim.lsp.buf.code_action()
-  end
-end, { desc = "Harper Quick Fix (Simple Cursor Layout)" })
+-- دالة لتبديل حالة harper-ls
+local function toggle_harper()
+    local clients = vim.lsp.get_active_clients()
+    local harper_active = false
+    local harper_client_id = nil
+    for _, client in ipairs(clients) do
+        if client.name == "harper_ls" then
+            harper_active = true
+            harper_client_id = client.id
+            break
+        end
+    end
+    
+    if harper_active then
+        vim.lsp.stop_client(harper_client_id)
+        print("Harper-LS stopped")
+    else
+        vim.cmd("LspStart harper_ls")
+        print("Harper-LS started")
+    end
+end
 
+-- إعداد اختصار لوحة المفاتيح (Keybinding)
+-- قمت باختيار <leader>th كاختصار (Toggle Harper)
+vim.keymap.set('n', '<leader>us', toggle_harper, { desc = 'Toggle Harper-LS' })
 
 -- map <F5> to run the current file with uv
 vim.keymap.set("n", "<F5>", function()
