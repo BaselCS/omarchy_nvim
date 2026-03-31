@@ -17,6 +17,7 @@ return {
                 SpelledNumbers = false,
                 AnA = true,
                 UnclosedQuotes = true,
+                LongSentences = false,
                 SentenceCapitalization = true,
                 RepeatedWords = true,
                 CorrectNumberSuffix = true,
