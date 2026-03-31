@@ -28,6 +28,13 @@ return {
           },
         },
       },
+      setup = {
+        harper_ls = function(server, server_opts)
+          -- Register the server config but do not auto-enable it.
+          vim.lsp.config(server, server_opts)
+          return true
+        end,
+      },
     },
   },
 
