@@ -6,6 +6,7 @@ return {
 	},
 	opts = {
 		picker_integration = true,
+		keymaps = false,
 
 		-- Auto-activate virtual envs when found
 		auto_activate_venv = true,
