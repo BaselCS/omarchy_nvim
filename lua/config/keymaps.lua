@@ -15,7 +15,6 @@ local function toggle_harper()
 		print("Harper-LS stopped")
 	else
 		vim.lsp.enable("harper_ls", true)
-		vim.cmd("LspStart harper_ls")
 		print("Harper-LS started")
 	end
 end

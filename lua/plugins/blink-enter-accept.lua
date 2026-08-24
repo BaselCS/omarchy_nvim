@@ -5,8 +5,8 @@ return {
 			signature = { enabled = true },
 			keymap = {
 				["<CR>"] = {
-					LazyVim.cmp.map({ "ai_accept" }),
 					"accept",
+					LazyVim.cmp.map({ "ai_accept" }),
 					"fallback",
 				},
 			},
